@@ -49,18 +49,10 @@ app.add_middleware(
 )
 
 # Load Model AI Satpam (MobileNetV2)
-class CustomDense(tf.keras.layers.Dense):
-    def __init__(self, *args, **kwargs):
-        kwargs.pop('quantization_config', None)
-        super().__init__(*args, **kwargs)
-
 model_satpam: Optional[tf.keras.Model] = None
 model_load_error = None
 try:
-    model_satpam = tf.keras.models.load_model(
-        "gatekeeper_model.keras",
-        custom_objects={'Dense': CustomDense}
-    )
+    model_satpam = tf.keras.models.load_model("gatekeeper_model.keras")
     logger.info("Model AI Gatekeeper (Satpam) berhasil dimuat.")
 except Exception as exc:
     model_load_error = str(exc)
