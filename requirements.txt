@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 python-multipart
-tensorflow-cpu==2.15.0
+tensorflow-cpu
 google-generativeai
 Pillow
 pandas
