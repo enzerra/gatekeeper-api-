@@ -2,6 +2,7 @@ import io
 import json
 import logging
 import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
 import re
 from typing import Any, Dict, List, Optional
 
