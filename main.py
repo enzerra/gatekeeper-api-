@@ -50,10 +50,12 @@ app.add_middleware(
 
 # Load Model AI Satpam (MobileNetV2)
 model_satpam: Optional[tf.keras.Model] = None
+model_load_error = None
 try:
     model_satpam = tf.keras.models.load_model("gatekeeper_model.keras")
     logger.info("Model AI Gatekeeper (Satpam) berhasil dimuat.")
 except Exception as exc:
+    model_load_error = str(exc)
     logger.error("Gagal memuat model: %s", exc)
 
 @app.get("/")
@@ -151,7 +153,7 @@ def _require_gemini() -> None:
 
 def _require_model() -> tf.keras.Model:
     if model_satpam is None:
-        raise HTTPException(status_code=503, detail="Model klasifikasi belum siap.")
+        raise HTTPException(status_code=503, detail=f"Model klasifikasi belum siap. Error: {model_load_error}")
     return model_satpam
 
 
