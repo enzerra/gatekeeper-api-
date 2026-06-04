@@ -1,8 +1,7 @@
 fastapi
 uvicorn
 python-multipart
-tensorflow-cpu
-tf-keras
+tensorflow-cpu==2.15.0
 google-generativeai
 Pillow
 pandas
